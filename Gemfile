@@ -5,6 +5,8 @@ gem 'pg'
 
 gem "nokogiri", ">= 1.10.4"
 
+gem "rubyzip", ">= 1.3.0"
+
 ruby '2.6.3'
 
 gem 'turbolinks', '~> 5.2.0'
