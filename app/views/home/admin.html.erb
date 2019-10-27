@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin Panel</title>
+</head>
+<body>
+<% flash.each do |key, value| %>
+  <div class="alert admin-alerts alert-<%= key %> alert-dismissible fade show" role="alert"><%= value %>
+  </div>
+<% end %>
+<div class="images-wrapper">
+  <% @images.each do |image| %>
+    <div class=" image-thumbnail" data-id="<%= image.id %>" type-id="image">
+      <%= image_tag(image.url.to_s) %>
+      <div class="delete"></div>
+      <%= fa_icon 'window-close'%>
+      <div class="admin-button-wrapper">
+      <% if image.is_cover == false %>
+        <%= button_to set_cover_path(image.id), class: 'admin add' do %>
+          <%= fa_icon 'check' %> Set as cover
+        <% end %>
+      <% else %>
+        <%= button_to destroy_cover_path(image.id), class: 'admin remove' do%>
+          <%= fa_icon 'times' %> Remove as cover
+        <% end %>
+      <% end %>
+      <% if Slide.find_by(image_id: image.id) %>
+        <%= button_to destroy_slide_path(Slide.find_by(image_id: image.id).id), class: 'admin remove' do %>
+          <%= fa_icon 'times' %> Remove as slide
+        <% end %>
+      <% else %>
+        <%= button_to set_slide_path(image.id), class: 'admin add' do %>
+          <%= fa_icon 'check' %> Set as slide
+        <% end %>
+      <% end %>
+      </div>
+    </div>
+  <% end %>
+  <button class="new-image">
+    <%= fa_icon 'photo' %> Add Image
+  </button>
+
+  <%= render template: 'images/new' %>
+</div>
+<script type="text/javascript" charset="utf-8">
+
+uploadImage();
+
+  $('.fa-window-close').click(function(){
+      var id = $(this).parent().attr("data-id");
+      var type = $(this).parent().attr("type-id");
+      var image = $(this).parent();
+      deleteImage(id, type, image);
+  });
+</script>
+
+</body>
+</html>

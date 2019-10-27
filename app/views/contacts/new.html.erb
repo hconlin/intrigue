@@ -1,0 +1,16 @@
+<%= form_with url: send_email_path do |f| %>
+  <div class="fname-input">
+    <%= f.label :First_name %><br><%= f.text_field :fname %>
+  </div>
+  <div class="lname-input">
+    <%= f.label :Last_name %><br><%= f.text_field :lname %>
+  </div>
+    <br>
+  <%= f.label :email %><br>
+  <%= f.email_field :email, class: "other-input contact-form-input" %>
+  <br>
+  <%= f.label :message %><br>
+  <%= f.text_area :body, as: :text, class: "contact-form-input" %>
+  <br>
+  <%= f.submit "Send Message", class: 'email-button' %>
+<% end %>

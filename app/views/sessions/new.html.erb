@@ -1,0 +1,20 @@
+<div class="login-form">
+  <div class="img-wrapper"><img src="<%= asset_path('logo.png') %>" height="70" alt="Logo"></div>
+<%= form_with url: sessions_path, remote: true do |f| %>
+  <div class="field">
+    <%= f.email_field :email, placeholder: 'Email', class: 'form-input' %>
+  </div>
+  <div class="field">
+    <%= f.password_field :password, placeholder: 'Password', class: 'form-input' %>
+  </div>
+  <div class="button-field">
+    <%= f.submit "Login", class:'submit-button' %>
+  </div>
+<% end %>
+
+<% flash.each do |key, value| %>
+  <br>
+    <div class="alert session-alerts alert-<%= key %> alert-dismissible fade show" role="alert"><%= value %>
+  </div>
+<% end %>
+</div>

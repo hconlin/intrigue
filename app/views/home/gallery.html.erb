@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+</head>
+<body>
+
+<div class="jumbotron">
+  <h1 class="display-4">Some of our projects!</h1>
+  <p class="lead">Be sure to check back. We're always posting new pictures and updating our portfolio.</p>
+  <hr>
+    <button id="custom-button-home">Back to homepage</button>
+</div>
+
+  <div class="image-container">
+      <% @images.each do |image| %>
+        <div class="image-wrapper">
+          <%= cl_image_tag(image.url.to_s, width: 400, height: 300, crop: "fill") %>
+        </div>
+      <% end %>
+  </div>
+
+<div id="modal" class="modal">
+  <div class="modal-content">
+    <span class="close">&times;</span>
+  </div>
+</div>
+
+</body>
+</html>

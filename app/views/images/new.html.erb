@@ -1,0 +1,9 @@
+<div class="add-image">
+<%= form_for @image  do |f| %>
+  <div class="field">
+    <%= f.file_field :url, class: 'new-image-form' %>
+  </div>
+
+  <%= f.submit "Add Image", id: 'new-image-submit'%>
+<% end %>
+</div>

@@ -1,0 +1,95 @@
+$green: #00a74e;
+$darkgreen: #007436;
+$grey: #646262;
+$dark: #424652;
+$light: #9a9da4;
+$lightest: #dbdcdc;
+
+@import "bootstrap";
+@import 'slick';
+@import 'slick-theme';
+@import "font-awesome";
+@import 'home';
+@import 'sessions';
+
+body{
+  font-family: 'Raleway', sans-serif;
+  padding-top: 127px;
+  overflow-x: hidden;
+  width: 100%;
+}
+
+html{
+  overflow-x: hidden;
+}
+
+h1{
+  color: $dark;
+  font-weight: bold;
+}
+
+[aria-label]:before{
+  color: $grey !important;
+  font-size: 40px;
+}
+
+.slick-prev{
+  left: -50px;
+}
+
+.slick-next{
+  right: -50px;
+}
+
+.slick-dots{
+  [aria-label]:before{
+    font-size: 15px;
+  }
+}
+
+
+.navbar{
+  border-bottom: solid 1px #d3d3d3;
+  background: white;
+}
+
+.admin-alerts{
+  position: absolute;
+  left: 50%;
+  margin-left: -300px;
+  width: 600px;
+  top: 150px;
+}
+
+li.active a{
+  color: $green !important;
+  border-bottom: solid 2px $green;
+}
+
+.nav-link:hover{
+  color: $green !important;
+}
+
+.nav-item {
+  background: white no-repeat;
+  background-image: linear-gradient(to bottom, $green, $green);
+  background-size: 0 2px, 100% 1px;
+  background-position: 50% 100%, 50% 100%;
+  transition: background-size 0.15s cubic-bezier(0.64, 0.09, 0.08, 1);
+}
+
+input:focus, .nav-item:hover, .nav-item:active{
+  background-size: 100% 2px, 100% 1px !important;
+  outline: none !important;
+}
+
+.hidden{
+  display: none;
+}
+
+.vr{
+  display: inline-block;
+  width: 1px;
+  background-color: $lightest;
+  height: 150px;
+}

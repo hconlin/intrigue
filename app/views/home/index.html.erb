@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:height="http://www.w3.org/1999/xhtml">
+<head>
+</head>
+<body>
+
+<div class="cover">
+  <div class="cover-image-wrapper">
+  <% if @cover %>
+    <%= image_tag(@cover.url.to_s, class: 'cover-image') %>
+  <% else %>
+    <%= image_tag('cover.jpg', class: 'cover-image') %>
+  <% end %>
+  </div>
+  <div class="cover-overlay">
+    <h1>Let's build your dream landscape</h1>
+    <h4>Big or small, we take on all projects</h4>
+    <button class="cover-overlay-button">
+      <a href="#contact-us"> Contact us for a free quote </a>
+    </button>
+    <div class="cover-overlay-bg"></div>
+  </div>
+</div>
+<div class="jumbotron">
+  <h1 class="display-4">Why Choose Intrigue?</h1>
+  <div class="jumbotron-item">
+    <%= fa_icon "comments" %> Free Quotes & Estimates
+    <p>Lorem ipsum lorem ipsum conturo del ora dos sod elving uno dre</p>
+    <button class="jumbotron-button" id="jumbotron-button-contact-us" style="width: 150px;">Contact us</button>
+  </div>
+  <div class="vr"></div>
+  <div class="jumbotron-item">
+    <%= fa_icon "thumbs-up" %> Dependable Service
+    <p>Lorem ipsum lorem ipsum conturo del ora ipsum conturo del ora dos</p>
+    <button class="jumbotron-button" id="jumbotron-button-services" style="width: 150px;">Our Services</button>
+  </div>
+  <div class="vr"></div>
+  <div class="jumbotron-item">
+    <%= fa_icon "check-square-o" %> Filler Content
+    <p>Del ora dos sod elving lorem ipsum lorem ipsum conturo del ora dos</p>
+    <button class="jumbotron-button" id="jumbotron-button-gallery" style="width: 150px;">Photo Gallery</button>
+  </div>
+</div>
+<% flash.each do |key, value| %>
+  <div class="alert admin-alerts alert-<%= key %> alert-dismissible fade show" role="alert"><%= value %>
+  </div>
+<% end %>
+<div class="main">
+  <div class="slider">
+    <% @slides.each do |slide| %>
+      <div class="image-wrapper"><%= image_tag(Image.find(slide.image_id).url.to_s) %></div>
+    <% end %>
+  </div>
+  <br>
+    <button id="custom-button-gallery">View our photo gallery</button>
+  <hr>
+  <div id="service">
+    <h1>Exceptional Services</h1>
+    <div class="container-wrapper">
+
+    <div class="service-item-wrapper">
+      <div class="service-item">
+        <div class="image-wrapper">
+          <%= image_tag('landscaping.jpg', height: 300) %>
+        </div>
+        <div class="service-overlay"><h5>Landscaping</h5>
+          <div class="service-overlay-bg"></div>
+        </div>
+      </div>
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt</p>
+    </div>
+
+    <div class="service-item-wrapper">
+      <div class="service-item">
+        <div class="image-wrapper">
+          <%= image_tag('pavers.jpg', height: 300) %>
+        </div>
+        <div class="service-overlay"><h5>Stone Pavers</h5>
+          <div class="service-overlay-bg"></div>
+        </div>
+      </div>
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt</p>
+    </div>
+
+    <div class="service-item-wrapper">
+      <div class="service-item">
+        <div class="image-wrapper">
+          <%= image_tag('water_feature.jpg', height: 300) %>
+        </div>
+        <div class="service-overlay"><h5>Water Features</h5>
+          <div class="service-overlay-bg"></div>
+        </div>
+      </div>
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt</p>
+    </div>
+    </div>
+    </div>
+  <div id="about">
+    <h1>About us</h1>
+    <div class="about-wrapper">
+      <%= image_tag('about.jpg', height: 300, class: 'about-image')%>
+      <div class="about-text"><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+        Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+        Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+        Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+        labore et dolore magna aliqua. Ut enim ad minim veniam. ullamco laboris nisi ut aliquip ex ea commodo consequat. ullamco laboris nisi ut aliquip ex ea commodo consequat.</p></div>
+        </div>
+  </div>
+  <hr>
+  <div id="contact-us">
+    <div class="contact-form">
+      <h1>Contact us</h1><br>
+      <div class="email-form">
+        <%= render template: "contacts/new" %>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript">
+
+</script>
+
+</body>
+</html>
