@@ -4,7 +4,8 @@ class SessionsController < ApplicationController
 
   def create
     user = User.find_by_email(params[:email])
-    if user.locked == true && user.locked_at > DateTime.now - (1.0/24.0)
+
+    if user.locked == true && user.locked_at.present? && user.locked_at > DateTime.now - (1.0/24.0)
       time = user.locked_at - DateTime.now - (1.0/24.0)
       time_left = time.strftime("%I:%M %P")
       flash[:danger] = "Your account is locked. It will unlock in " + time_left
