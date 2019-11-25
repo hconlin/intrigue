@@ -6,9 +6,8 @@ class SessionsController < ApplicationController
     user = User.find_by_email(params[:email])
 
     if user.locked == true && user.locked_at.present? && user.locked_at > DateTime.now - (1.0/24.0)
-      time = user.locked_at - DateTime.now - (1.0/24.0)
-      time_left = time.strftime("%I:%M %P")
-      flash[:danger] = "Your account is locked. It will unlock in " + time_left
+      time_left = distance_of_time_in_words(DateTime.now, user.locked_at + 1.hour)
+      flash[:danger] = "Your account is locked. Try again in " + time_left
       redirect_to admin_path
     # user's account is either not locked or an hour has passed
     else
