@@ -16,6 +16,7 @@ class SessionsController < ApplicationController
         session[:user_id] = user.id
         user.login_attempts = 0
         user.locked = false
+        user.save
         redirect_to admin_panel_path
       else
         if user.locked_at.present? && user.locked_at <= DateTime.now - (1.0/24.0)
@@ -26,6 +27,7 @@ class SessionsController < ApplicationController
         if user.login_attempts == 4
           user.locked = true
           user.locked_at = DateTime.now
+          user.save
           flash[:danger] = "Your account has been locked. Try again in 1 hour"
           redirect_to admin_path
         else
