@@ -18,7 +18,7 @@ class SessionsController < ApplicationController
         user.locked = false
         redirect_to admin_panel_path
       else
-        if user.locked_at <= DateTime.now - (1.0/24.0)
+        if user.locked_at.present? && user.locked_at <= DateTime.now - (1.0/24.0)
           user.login_attempts = 0
         end
         #increment login attempts
