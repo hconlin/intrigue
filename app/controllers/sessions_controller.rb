@@ -28,9 +28,10 @@ class SessionsController < ApplicationController
           user.locked_at = DateTime.now
           flash[:danger] = "Your account has been locked. Try again in 1 hour"
           redirect_to admin_path
+        else
+          flash[:danger] = "Invalid credentials. Please try again"
+          redirect_to admin_path
         end
-        flash[:danger] = "Invalid credentials. Please try again"
-        redirect_to admin_path
       end
     end
   end
