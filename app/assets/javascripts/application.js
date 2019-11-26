@@ -192,7 +192,8 @@ $(document).ready(function () {
         var imageHtml = '<img src="' + image + '">';
         $('.modal-content').append(imageHtml);
         $('#modal').css("display", "block");
-        if($('.modal-content img').height() > window.innerHeight - 200 && window.innerHeight < window.innerWidth){
+        if(($('.modal-content img').height() > window.innerHeight - 200 && window.innerHeight < window.innerWidth) ||
+      ($('.modal-content img').height() > window.innerHeight - 1000 && window.innerHeight < window.innerWidth)){
             var naturalHeight = $(this).height();
             var naturalWidth = $(this).width();
             var adjustedHeight = window.innerHeight - 200 - 150;
