@@ -1,12 +1,15 @@
 class SessionsController < ApplicationController
+  include ActionView::Helpers::DateHelper
+
   def new
   end
 
   def create
     user = User.find_by_email(params[:email])
     if user.locked_at.present? && user.locked_at > DateTime.now - (1.0/24.0)
-      time_left = distance_of_time_in_words(DateTime.now, user.locked_at + 1.hour)
-      flash[:danger] = "Your account is locked. Try again in " + time_left
+      time_diff = (DateTime.now - (1.0/24.0) - user.locked_at)
+      time_left = (time_diff / 1.minute).round
+      flash[:danger] = "Your account is locked. Try again in " + time_left + " minutes"
       redirect_to admin_path
     # user's account is either not locked or an hour has passed
     else
@@ -27,8 +30,9 @@ class SessionsController < ApplicationController
           if user.login_attempts == 4
             user.locked_at = DateTime.now
             user.save
-            time_left = distance_of_time_in_words(DateTime.now, user.locked_at + 1.hour)
-            flash[:danger] = "Your account is locked. Try again in " + time_left
+            time_diff = (DateTime.now - (1.0/24.0) - user.locked_at)
+            time_left = (time_diff / 1.minute).round
+            flash[:danger] = "Your account is locked. Try again in " + time_left + " minutes"
             redirect_to admin_path
           else
             flash[:danger] = "Invalid credentials. Please try again"
