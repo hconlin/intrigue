@@ -24,6 +24,8 @@ class SessionsController < ApplicationController
           user.login_attempts = 1
           user.locked_at = nil
           user.save
+          flash[:danger] = "Invalid credentials. Please try again"
+          redirect_to admin_path
         else
           #increment login attempts
           user.increment!(:login_attempts)
