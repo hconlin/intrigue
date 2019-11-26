@@ -9,7 +9,7 @@ class SessionsController < ApplicationController
     if user.locked_at.present? && user.locked_at > DateTime.now - 1.hour
       time_diff = (user.locked_at + 1.hour).to_i - DateTime.now.to_i
       time_left = (time_diff / 1.minute).round
-      flash[:danger] = "Your account is locked. Try again in " + time_left + " minutes"
+      flash[:danger] = "Your account is locked. Try again in " + time_left.to_s + " minutes"
       redirect_to admin_path
     # user's account is either not locked or an hour has passed
     else
@@ -30,9 +30,7 @@ class SessionsController < ApplicationController
           if user.login_attempts == 4
             user.locked_at = DateTime.now
             user.save
-            time_diff = (user.locked_at + 1.hour).to_i - DateTime.now.to_i
-            time_left = (time_diff / 1.minute).round
-            flash[:danger] = "Your account is locked. Try again in " + time_left + " minutes"
+            flash[:danger] = "Your account has been locked for 1 hour"
             redirect_to admin_path
           else
             flash[:danger] = "Invalid credentials. Please try again"
