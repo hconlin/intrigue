@@ -4,8 +4,7 @@ class SessionsController < ApplicationController
 
   def create
     user = User.find_by_email(params[:email])
-
-    if user.locked == true && user.locked_at.present? && user.locked_at > DateTime.now - (1.0/24.0)
+    if user.locked_at.present? && user.locked_at > DateTime.now - (1.0/24.0)
       time_left = distance_of_time_in_words(DateTime.now, user.locked_at + 1.hour)
       flash[:danger] = "Your account is locked. Try again in " + time_left
       redirect_to admin_path
@@ -14,24 +13,27 @@ class SessionsController < ApplicationController
       if user && user.authenticate(params[:password])
         session[:user_id] = user.id
         user.login_attempts = 0
-        user.locked = false
+        user.locked_at = nil
         user.save
         redirect_to admin_panel_path
       else
-        if user.locked_at.present? && user.locked_at <= DateTime.now - (1.0/24.0)
-          user.login_attempts = 0
-        end
-        #increment login attempts
-        user.increment!(:login_attempts)
-        if user.login_attempts == 4
-          user.locked = true
-          user.locked_at = DateTime.now
+        if user.locked_at.present? && user.locked_at < DateTime.now - (1.0/24.0)
+          user.login_attempts = 1
+          user.locked_at = nil
           user.save
-          flash[:danger] = "Your account has been locked. Try again in 1 hour"
-          redirect_to admin_path
         else
-          flash[:danger] = "Invalid credentials. Please try again"
-          redirect_to admin_path
+          #increment login attempts
+          user.increment!(:login_attempts)
+          if user.login_attempts == 4
+            user.locked_at = DateTime.now
+            user.save
+            time_left = distance_of_time_in_words(DateTime.now, user.locked_at + 1.hour)
+            flash[:danger] = "Your account is locked. Try again in " + time_left
+            redirect_to admin_path
+          else
+            flash[:danger] = "Invalid credentials. Please try again"
+            redirect_to admin_path
+          end
         end
       end
     end
