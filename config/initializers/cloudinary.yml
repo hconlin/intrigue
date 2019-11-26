@@ -1,7 +1,7 @@
 development:
   cloud_name: ENV['S3_KEY']
   api_key: ENV['S3_KEY']
-  api_secret: ENV['S3_KEY'
+  api_secret: ENV['S3_KEY']
 
 production:
   cloud_name: ENV['CLOUD_NAME']
