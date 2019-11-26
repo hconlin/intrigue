@@ -7,6 +7,15 @@
 //= require jquery.slick
 //= require_tree .
 
+$(document).ready(function(){
+  var screenHeight = window.innerHeight - 127;
+  var screenWidth = window.innerWidth;
+  $('.cover-image').css('height', screenHeight);
+  if($('.cover-image').width() < screenWidth){
+    $('.cover-image').css('width', '100%');
+  }
+});
+
 function deleteImage(id, type, image) {
     Swal.fire({
         title: 'Are you sure you want to delete this?',
@@ -200,23 +209,6 @@ $(document).ready(function () {
             $('.modal-content').css('width', '');
         })
     })
-});
-
-//homepage fade in
-$(document).ready(function(){
-  $('.cover-image').hide();
-  $('.cover-overlay').hide();
-  $('.cover-overlay').fadeIn(1500);
-  $('.cover-image').fadeIn(1500);
-});
-
-$(document).ready(function(){
-  var screenHeight = window.innerHeight - 127;
-  var screenWidth = window.innerWidth;
-  $('.cover-image').css('height', screenHeight);
-  if($('.cover-image').width() < screenWidth){
-    $('.cover-image').css('width', '100%');
-  }
 });
 
 $(document).ready(function(){
